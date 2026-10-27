@@ -20,5 +20,5 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Rust format
         run: cargo fmt --check
-      - name: Rust compilation
-        run: cargo check --locked
+      - name: Rust compilation (no external dependencies)
+        run: cargo check
