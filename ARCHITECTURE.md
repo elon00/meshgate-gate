@@ -1,31 +1,22 @@
-﻿# meshgate-gate (}ticker) // PRODUCTION ARCHITECTURE BLUEPRINT
+# Meshgate Gate — reviewed scope and missing layers
 
-> **Canonical System ID**: QMOOSA-0950  
-> **Component Role**: TESTS  
-> **Institutional Reality Gate Compliance**: 100/100 VERIFIED  
+**Canonical System ID:** QMOOSA-0950
+**Approved role:** TESTS (Batch 190, Mesh Reality Gate & Network Invariant Tester)
+**Current implementation:** Offline, deterministic undirected topology validation only.
 
----
+## Evidence-bearing component
 
-## 1. High-Performance Multi-Chain Infrastructure
-- **QuickNode RPC Gateway**: High-throughput multi-chain node fabric (EVM, Solana, Base, Arbitrum).
-- **Endpoint Failover**: Automated WebSocket stream recovery with sub-50ms heartbeat latency.
+src/mesh_topology_gate.py validates a bounded JSON graph with unique node identifiers, canonical undirected edges, no self-links, known endpoints and connectivity. It rejects malformed/oversized input and duplicate JSON keys. tests/test_mesh_topology.py exercises positive cases, adversarial inputs and the actual CLI in subprocesses.
 
-## 2. Invariant Reality Gates & Mathematical Engine
-- **Conway Automaton Engine**: 2D cellular automaton bitboard transition matrix (B3/S23) for deterministic state verification.
-- **X402 Bazaar Micropayments**: HTTP 402 sub-cent machine-to-machine streaming rail with EIP-712 non-reentrant ticket validation.
-- **Post-Quantum Cryptography (PQC)**: NIST FIPS 203 (ML-KEM) lattice encapsulation and FIPS 204 (ML-DSA) state signatures.
+## Not implemented
 
-## 3. Autonomous AI & Cognitive Agent Framework
-- **Raven Recursive Self-Improvement (RSI)**: Continuous neural self-reflection and inference verification.
-- **REA (Reasoning & Execution Agent)**: Actor-model cognitive task dispatcher.
-- **Model Context Protocol (MCP)**: Native standardized tool calling and schema validation.
+Live mesh telemetry, secure transport, authenticated peer identities, routing, partition recovery, Web4/Conway, x402 settlement, tokenomics, multi-chain RPC, AI agents, PQC, FIPS-validated cryptography and production deployments are not present or verified in this component. The Rust binary intentionally exits nonzero rather than claiming these capabilities.
 
-## 4. Unlimited Dynamic Tokenomics & Fair-Launch AMM
-- Continuous polynomial liquidity curve: $$Price(S) = P_0 + k \cdot S^\alpha$$
-- Instant liquidity absorption with zero initial LP capital requirements.
+## Release gates
 
-## 5. Security & Verification Harness
-- Automated Smoke Test (<30s runtime)
-- 10,000-cycle Invariant Regression Battery
-- Memory and Thread Sanitizers
-- GitHub Actions CodeQL Security Analysis CI
+1. Run Python compilation and implementation-coupled tests on the exact PR head.
+2. Run Rust formatting/build and initialized Python CodeQL.
+3. Require a separate design/security review before accepting this limited gate.
+4. Implement and independently verify actual network/routing/crypto layers before any product-wide SECURITY_APPROVED or DEPLOYMENT_READY decision.
+
+No mocks are used to claim real-network behavior; the input is an explicitly offline graph fixture. No security certification or 100/100 claim.
